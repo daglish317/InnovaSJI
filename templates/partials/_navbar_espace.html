@@ -1,0 +1,23 @@
+{% load static %}{% with current=request.resolver_match.url_name %}
+<header class="site-header sticky-top">
+  <nav class="navbar navbar-expand-lg" aria-label="Navigation principale">
+    <div class="container">
+      <a class="navbar-brand brand" href="{% url 'my_project' pk=project.id %}">
+        <img src="{% static 'img/logo.png' %}" alt="Logo Saint Jean Innova" width="44" height="44"><span>Espace responsable</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuPrincipal" aria-controls="menuPrincipal" aria-expanded="false" aria-label="Ouvrir le menu"><span class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse justify-content-end" id="menuPrincipal">
+        <ul class="navbar-nav align-items-lg-center">
+          <li class="nav-item"><a class="nav-link{% if current == 'my_project' or current == 'add_member' %} on{% endif %}" href="{% url 'my_project' pk=project.id %}"{% if current == 'my_project' or current == 'add_member' %} aria-current="page"{% endif %}>Mon projet</a></li>
+          <li class="nav-item nav-cta">
+            <a class="btn btn-primary btn-sm" href="{% url 'home' %}">Accueil</a>
+          </li>
+          <li class="nav-item nav-cta">
+            <form method="post" action="{% url 'logout' %}" class="m-0">{% csrf_token %}<button class="btn btn-primary btn-sm" type="submit" data-no-loading>Déconnexion</button></form>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+{% endwith %}

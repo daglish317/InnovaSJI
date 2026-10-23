@@ -1,0 +1,24 @@
+{% extends "layouts/gestion.html" %}
+{% block title %}Modifier : {{ titre|default:"contenu" }}{% endblock %}
+{% block content %}
+<section class="page">
+  <div class="container narrow stack">
+    <a class="soft link" href="{% url 'admin_contenus' %}" data-reveal>Retour aux contenus</a>
+    <h1 data-reveal>Modifier : {{ titre|default:"contenu" }}</h1>
+    <form method="post" enctype="multipart/form-data" class="form-zone" data-reveal data-delay="100">
+      {% csrf_token %}
+      {% include "partials/_form_errors.html" with form=form %}
+      <div class="card"><div class="card-body"><div class="row g-3">
+        {% for field in form.visible_fields %}
+          {% include "partials/_field.html" with field=field col="col-12" %}
+        {% endfor %}
+        {% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}
+        <div class="col-12 form-foot">
+          <button class="btn btn-primary" type="submit">Enregistrer</button>
+          <a class="btn btn-outline-primary" href="{% url 'admin_contenus' %}">Annuler</a>
+        </div>
+      </div></div></div>
+    </form>
+  </div>
+</section>
+{% endblock %}

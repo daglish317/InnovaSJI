@@ -1,0 +1,49 @@
+{% extends "layouts/gestion.html" %}
+{% block title %}Demandes de sponsoring{% endblock %}
+{% block content %}
+<section class="page">
+  <div class="container stack">
+    <h1 data-reveal>Demandes de sponsoring</h1>
+    <div class="tw" data-reveal data-delay="100">
+      <table class="table tbl">
+        <thead><tr><th>Organisation</th><th>Type</th><th>Soutien</th><th>Montant</th><th>Contact</th><th>Statut</th><th>Actions</th></tr></thead>
+        <tbody data-stagger="60">
+          {% for d in demandes %}
+          <tr>
+            <td><b>{{ d.organisation }}</b></td>
+            <td>{{ d.get_type_organisation_display }}</td>
+            <td>{{ d.get_type_soutien_display }}</td>
+            <td>{% if d.montant %}{{ d.montant }} FCFA{% else %}Sans objet{% endif %}</td>
+            <td>{{ d.responsable }}<br><a class="soft link" href="mailto:{{ d.email }}">{{ d.email }}</a></td>
+            <td>{% include "partials/_statut_badge.html" with statut=d.statut label=d.get_statut_display %}</td>
+            <td>
+              <div id="detail-{{ d.pk }}" class="d-none">
+                <dl class="kv">
+                  <dt>Organisation</dt><dd>{{ d.organisation }}</dd>
+                  <dt>Responsable</dt><dd>{{ d.responsable }}</dd>
+                  <dt>E-mail</dt><dd>{{ d.email }}</dd>
+                  <dt>Téléphone</dt><dd>{{ d.telephone|default:"Non renseigné" }}</dd>
+                  <dt>Site web</dt><dd>{{ d.site_web|default:"Non renseigné" }}</dd>
+                  <dt>Message</dt><dd class="pre">{{ d.message|default:"Aucun message" }}</dd>
+                </dl>
+              </div>
+              <div class="row-actions">
+                <button type="button" class="btn btn-outline-primary btn-sm" data-detail="#detail-{{ d.pk }}" data-title="{{ d.organisation }}">Détails</button>
+                {% if d.statut != "accepte" and d.statut != "refuse" %}
+                  <form method="post" action="{% url 'admin_sponsor_accepter' d.pk %}">{% csrf_token %}<button class="btn btn-primary btn-sm" type="submit">Accepter</button></form>
+                  <button type="button" class="btn btn-outline-danger btn-sm" data-confirm data-action="{% url 'admin_sponsor_refuser' d.pk %}"
+                          data-title="Refuser cette demande ?" data-text="La proposition de {{ d.organisation }} sera refusée." data-ok="Refuser">Refuser</button>
+                {% endif %}
+              </div>
+            </td>
+          </tr>
+          {% empty %}
+          <tr><td colspan="7" class="empty">Aucune demande de sponsoring pour le moment.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% include "partials/_pagination.html" %}
+  </div>
+</section>
+{% endblock %}

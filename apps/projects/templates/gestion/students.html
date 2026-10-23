@@ -1,0 +1,40 @@
+{% extends "layouts/gestion.html" %}
+{% block title %}Candidats{% endblock %}
+{% block content %}
+<section class="page">
+  <div class="container stack">
+    <h1 data-reveal>Candidats</h1>
+    <p class="lead" data-reveal data-delay="100">Chaque matricule n’apparaît que dans un seul projet.</p>
+    <form method="get" class="search-bar" data-filters data-reveal data-delay="150">
+      <input class="form-control" type="search" name="q" value="{{ request.GET.q }}" placeholder="Rechercher un nom ou un matricule" aria-label="Rechercher">
+      <select class="form-select" name="niveau" aria-label="Niveau">
+        <option value="">Tous les niveaux</option>
+        <option value="L1" {% if request.GET.niveau == "L1" %}selected{% endif %}>L1</option>
+        <option value="L2" {% if request.GET.niveau == "L2" %}selected{% endif %}>L2</option>
+        <option value="L3" {% if request.GET.niveau == "L3" %}selected{% endif %}>L3</option>
+        <option value="M1" {% if request.GET.niveau == "M1" %}selected{% endif %}>M1</option>
+        <option value="M2" {% if request.GET.niveau == "M2" %}selected{% endif %}>M2</option>
+      </select>
+      <button class="btn btn-primary" type="submit">Rechercher</button>
+      {% if request.GET.q or request.GET.niveau %}<a class="reset" href="{% url 'admin_candidats' %}">Réinitialiser</a>{% endif %}
+    </form>
+    <div class="tw" data-reveal data-delay="200">
+      <table class="table tbl">
+        <thead><tr><th>Nom et prénom</th><th>Matricule</th><th>Niveau</th><th>Projet</th><th>Rôle</th></tr></thead>
+        <tbody data-stagger="50">
+          {% for student in students %}
+          <tr>
+            <td>{{ student.name }} {{ student.firstname }}</td><td class="id">{{ student.registration_number }}</td><td>{{ student.level }}</td>
+            <td><a class="link" href="{% url 'project_detail_admin' student.project.pk %}">{{ student.project.title}}</a></td>
+            <td>{% if student.is_chief %}<span class="badge st">Responsable</span>{% else %}Membre{% endif %}</td>
+          </tr>
+          {% empty %}
+          <tr><td colspan="5" class="empty">Aucun candidat ne correspond à votre recherche.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% include "partials/_pagination.html" %}
+  </div>
+</section>
+{% endblock %}

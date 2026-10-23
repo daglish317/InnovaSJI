@@ -1,0 +1,26 @@
+{% extends "layouts/public.html" %}
+{% block title %}Sponsors et partenaires{% endblock %}
+{% block content %}
+<section class="page">
+  <div class="container stack">
+    <h1 data-reveal>Sponsors et partenaires</h1>
+    <p class="lead" data-reveal data-delay="100">Ils soutiennent les projets du concours. Leurs lots peuvent compléter les récompenses.</p>
+    {% if partenaires %}
+    <div class="g" data-stagger="80">
+      {% for p in partenaires %}
+        {% if p.site_web %}<a class="partner" href="{{ p.site_web }}" target="_blank" rel="noopener noreferrer">{% else %}<div class="partner">{% endif %}
+          {% if p.logo %}<img src="{{ p.logo.url }}" alt="{{ p.nom }}" loading="lazy">{% else %}<strong>{{ p.nom }}</strong>{% endif %}
+        {% if p.site_web %}</a>{% else %}</div>{% endif %}
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="slot" data-reveal>Les partenaires du concours seront annoncés prochainement.</div>
+    {% endif %}
+    <div class="card dark narrow" data-reveal><div class="card-body flow">
+      <h3>Vous souhaitez soutenir le concours ?</h3>
+      <p class="soft">Entreprises, organisations et particuliers peuvent proposer un soutien financier, matériel ou un accompagnement.</p>
+      <a class="btn btn-warning" href="{% url 'devenir_sponsor' %}">Devenir sponsor</a>
+    </div></div>
+  </div>
+</section>
+{% endblock %}

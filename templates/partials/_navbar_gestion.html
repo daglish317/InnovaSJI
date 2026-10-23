@@ -1,0 +1,26 @@
+{% load static %}{% with current=request.resolver_match.url_name %}
+<header class="site-header sticky-top">
+  <nav class="navbar navbar-expand-lg" aria-label="Navigation principale">
+    <div class="container">
+      <a class="navbar-brand brand" href="{% url 'project_list' %}">
+        <img src="{% static 'img/logo.png' %}" alt="Logo Saint Jean Innova" width="44" height="44"><span>Administration</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuPrincipal" aria-controls="menuPrincipal" aria-expanded="false" aria-label="Ouvrir le menu"><span class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse justify-content-end" id="menuPrincipal">
+        <ul class="navbar-nav align-items-lg-center">
+          <li class="nav-item"><a class="nav-link{% if current == 'project_list' or current == 'project_detail_admin' %} on{% endif %}" href="{% url 'project_list' %}"{% if current == 'project_list' or current == 'project_detail_admin' %} aria-current="page"{% endif %}>Projets</a></li>
+          <li class="nav-item"><a class="nav-link{% if current == 'students_list' %} on{% endif %}" href="{% url 'students_list' %}"{% if current == 'students_list' %} aria-current="page"{% endif %}>Candidats</a></li>
+          <li class="nav-item"><a class="nav-link{% if current == 'admin_sponsors' %} on{% endif %}" href=""{% if current == 'admin_sponsors' %} aria-current="page"{% endif %}>Sponsors</a></li>
+          <li class="nav-item"><a class="nav-link{% if current == 'admin_contenus' or current == 'admin_contenu_modifier' %} on{% endif %}" href=""{% if current == 'admin_contenus' or current == 'admin_contenu_modifier' %} aria-current="page"{% endif %}>Contenus</a></li>
+          <li class="nav-item nav-cta">
+            <a class="btn btn-primary btn-sm" href="{% url 'home' %}">Accueil</a>
+          </li>
+          <li class="nav-item nav-cta">
+            <form method="post" action="{% url 'logout' %}" class="m-0">{% csrf_token %}<button class="btn btn-primary btn-sm" type="submit" data-no-loading>Déconnexion</button></form>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+{% endwith %}

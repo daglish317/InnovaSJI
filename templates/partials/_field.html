@@ -1,0 +1,20 @@
+{% load innova_ui %}{# Paramètres : field, col (défaut col-md-6), hint (facultatif) #}
+{% if field %}
+<div class="{{ col|default:'col-md-6' }}">
+  {% if field.field.widget.input_type == "checkbox" %}
+  <div class="form-check">
+    {{ field|bs }}
+    <label class="form-check-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+  </div>
+  {% else %}
+  <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}{% if hint or field.help_text %}<small>{% firstof hint field.help_text %}</small>{% endif %}</label>
+  {{ field|bs }}
+  {% endif %}
+  {% if field.errors %}
+  <div class="field-error" id="{{ field.auto_id }}_err" role="alert">
+    <svg class="ico" aria-hidden="true"><use href="#i-x"/></svg>
+    <span>{% for e in field.errors %}{{ e }}{% if not forloop.last %}<br>{% endif %}{% endfor %}</span>
+  </div>
+  {% endif %}
+</div>
+{% endif %}

@@ -1,0 +1,37 @@
+{% extends "layouts/espace.html" %}
+{% block title %}Ajouter un membre{% endblock %}
+{% block content %}
+<section class="page">
+
+    <div class="container narrow stack">
+
+        <h1 data-reveal>Ajouter un membre</h1>
+        <p class="lead" data-delay="100" data-reveal>Il reste {{ remaining_candidates_count }} place{{ remaining_candidates_count|pluralize }} dans l’équipe, qui compte {{ MAX_MEMBERS }} membres au maximum.</p>
+
+        <form class="form-zone" data-delay="150" data-reveal method="post">
+
+            {% csrf_token %}
+            {% include "partials/_form_errors.html" with form=form %}
+            <div class="card">
+                <div class="card-body">
+                    <div class="row g-3">
+                        {% include "partials/_field.html" with field=form.firstname %}
+                        {% include "partials/_field.html" with field=form.name %}
+                        {% include "partials/_field.html" with field=form.registration_number %}
+                        {% include "partials/_field.html" with field=form.level %}
+                        {% include "partials/_field.html" with field=form.email %}
+                        {% include "partials/_field.html" with field=form.phone %}
+                        <div class="col-12 form-foot">
+                            <button class="btn btn-primary" type="submit">Ajouter à l’équipe</button>
+                            <a class="btn btn-outline-primary" href="{% url 'my_project' pk=project.id %}">Annuler</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+
+</section>
+{% endblock %}

@@ -1,0 +1,83 @@
+{% extends "layouts/public.html" %}
+{% load static %}
+{% block title %}Accueil{% endblock %}
+{% block content %}
+<section class="page">
+    <div class="container stack">
+        <div class="hero">
+            <div class="hero-copy">
+                <div aria-hidden="true" class="tri anim"><i></i><i></i><i></i></div>
+                <h1 data-split>L’innovation au cœur du génie étudiant.</h1>
+                <p class="lead" data-delay="650" data-reveal>Le Prix SJI Innova met en compétition des projets
+                    d’innovation technologique conçus par des étudiants du Campus d’Etok-Koss, pour répondre à des
+                    problématiques réelles.</p>
+                <div class="actions" data-delay="800" data-reveal>
+                    {% if user.is_authenticated %}
+                      {% if user.is_staff %}
+                        <a class="btn btn-primary" href="{% url 'project_list' %}">Administration</a>
+                      {% else %}
+                        <a class="btn btn-primary" href="{% url 'my_project' pk=project.id %}">Mon espace</a>
+                      {% endif %}
+                    {% else %}
+                      <a class="btn btn-primary" href="{% url 'register' %}">Inscrire mon projet</a>
+                    {% endif %}
+                    <a class="btn btn-outline-primary" href="{">Lire le règlement</a>
+                </div>
+            </div>
+            <div class="blueprint" data-delay="300" data-reveal="scale">
+                <div class="logo-float"><img alt="Logo Saint Jean Innova" height="400" src="{% static 'img/logo.png' %}"
+                                             width="400"></div>
+            </div>
+        </div>
+
+        <div><h2 data-reveal>Trois phases, une finale</h2></div>
+        <div class="tl" data-stagger="160">
+            <div><span>Phase 1, de novembre à décembre</span><b>Lancement et dépôt des projets</b></div>
+            <div><span>Phase 2, en décembre</span><b>Évaluation, présélection et liste des finalistes</b></div>
+            <div><span>Phase 3, le 10 février</span><b>Finale et remise des prix au Campus d’Etok-Koss</b></div>
+        </div>
+    </div>
+
+    <div class="band mt-section">
+        <div class="container seg-wrap" data-anim>
+            <h2 data-reveal>Ce que le jury évalue</h2>
+            <div aria-label="Répartition des critères : originalité 30 %, faisabilité 25 %, impact 25 %, présentation 20 %" class="seg mt-4"
+                 role="img">
+                <i style="flex:30;background:var(--nuit)"></i><i style="flex:25;background:var(--signal)"></i><i
+                    style="flex:25;background:#7FA6E3"></i><i style="flex:20;background:#BCD0EE"></i>
+            </div>
+            <div class="segl">
+                <div style="flex:30"><b><span data-count="30">30</span>&nbsp;%</b>Originalité et innovation</div>
+                <div style="flex:25"><b><span data-count="25">25</span>&nbsp;%</b>Faisabilité technique</div>
+                <div style="flex:25"><b><span data-count="25">25</span>&nbsp;%</b>Impact potentiel</div>
+                <div style="flex:20"><b><span data-count="20">20</span>&nbsp;%</b>Qualité de la présentation</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container g mt-section" data-stagger="150">
+        <div class="card hoverable">
+            <div class="card-body flow">
+                <h3>Seul, ou jusqu’à cinq étudiants</h3>
+                <p class="soft">Chaque étudiant ne peut participer qu’à un seul projet.</p>
+                {% if user.is_authenticated %}
+                {% if user.is_staff %}
+                <a class="btn btn-primary" href="{% url 'project_list' %}">Administration</a>
+                {% else %}
+                <a class="btn btn-primary" href="{% url 'my_project' pk=project.id %}">Mon espace</a>
+                {% endif %}
+                {% else %}
+                <a class="btn btn-primary" href="{% url 'register' %}">Inscrire mon projet</a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="card dark hoverable">
+            <div class="card-body flow">
+                <h3>Accompagner les projets du concours</h3>
+                <p class="soft">Entreprises, organisations et particuliers peuvent proposer leur soutien.</p>
+                <a class="btn btn-warning" href="">Devenir sponsor</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

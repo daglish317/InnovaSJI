@@ -1,0 +1,21 @@
+{% extends "layouts/espace.html" %}
+{% block title %}Modifier mon projet{% endblock %}
+{% block content %}
+<section class="page">
+  <div class="container narrow stack">
+    <a class="soft link" href="{% url 'my_project' pk=project.id %}" data-reveal>Retour à mon projet</a>
+    <h1 data-reveal>Modifier mon projet</h1>
+    <form method="post" enctype="multipart/form-data" class="form-zone" data-reveal data-delay="100">
+      {% csrf_token %}
+      {% include "partials/_form_errors.html" with form=form %}
+      <div class="card"><div class="card-body"><div class="row g-3">
+        {% include "partials/_projet_fields.html" with form=form %}
+        <div class="col-12 form-foot">
+          <button class="btn btn-primary" type="submit">Enregistrer les modifications</button>
+          <a class="btn btn-outline-primary" href="{% url 'my_project' pk=project.id %}">Annuler</a>
+        </div>
+      </div></div></div>
+    </form>
+  </div>
+</section>
+{% endblock %}

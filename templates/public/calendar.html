@@ -1,0 +1,17 @@
+{% extends "layouts/public.html" %}
+{% block title %}Calendrier{% endblock %}
+{% block content %}
+<section class="page">
+  <div class="container stack">
+    <h1 data-reveal>Calendrier</h1>
+    <p class="lead" data-reveal data-delay="100">Les dates communiquées sont impératives et doivent être strictement respectées.</p>
+    <div class="tl" data-stagger="180">
+      <div><span>Phase 1, de novembre à décembre</span><b>Lancement et dépôt des projets</b><p class="soft mt-2">Inscription du projet, constitution de l’équipe et dépôt de la présentation.</p></div>
+      <div><span>Phase 2, en décembre, avant les congés de Noël</span><b>Évaluation, présélection et liste des finalistes</b><p class="soft mt-2">Le jury évalue les dossiers et la liste des finalistes est publiée.</p></div>
+      <div><span>Phase 3, le 10 février</span><b>Finale et cérémonie de remise des prix</b><p class="soft mt-2">Au Campus Saint Jean Ingénieur d’Etok-Koss.</p></div>
+    </div>
+    <div class="card narrow" data-reveal><div class="card-body flow"><h3>Dossier hors délai</h3><p class="soft">Tout dossier incomplet ou déposé hors délai est automatiquement disqualifié.</p></div></div>
+    <div class="actions" data-reveal><a class="btn btn-primary" href="{% url 'inscription' %}">Inscrire mon projet</a></div>
+  </div>
+</section>
+{% endblock %}

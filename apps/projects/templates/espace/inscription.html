@@ -1,0 +1,49 @@
+{% extends "layouts/public.html" %}
+{% load innova_ui %}
+{% block title %}Inscrire mon projet{% endblock %}
+{% block content %}
+
+<section class="page">
+
+  <div class="container narrow stack">
+
+    <h1 data-reveal>Inscrire mon projet</h1>
+    <p class="lead" data-reveal data-delay="100">Le responsable du projet crée l’inscription, puis ajoute ses coéquipiers depuis son espace. Vous pouvez aussi participer seul.</p>
+
+    <form method="post" enctype="multipart/form-data" class="form-zone">
+      {% csrf_token %}
+      {% include "partials/_form_errors.html" with form=chief_form form2=project_form title="Votre inscription n’a pas pu être enregistrée." %}
+
+      <div class="card" data-reveal><div class="card-body">
+
+        <h3 class="mb-3">1. Le responsable du projet</h3>
+        <div class="row g-3">
+          {% include "partials/_field.html" with field=chief_form.firstname %}
+          {% include "partials/_field.html" with field=chief_form.name %}
+          {% include "partials/_field.html" with field=chief_form.registration_number %}
+          {% include "partials/_field.html" with field=chief_form.level %}
+          {% include "partials/_field.html" with field=chief_form.email %}
+          {% include "partials/_field.html" with field=chief_form.phone %}
+          {% include "partials/_field.html" with field=chief_form.password1 %}
+          {% include "partials/_field.html" with field=chief_form.password2 %}
+        </div>
+
+      </div></div>
+
+      <div class="card" data-reveal><div class="card-body">
+        <h3 class="mb-3">2. Le projet</h3>
+        <div class="row g-3">
+          {% include "partials/_projet_fields.html" with form=project_form %}
+          <div class="col-12 form-foot">
+            <button class="btn btn-primary" type="submit">Créer mon projet</button>
+            <div class="col-12"><a class="soft link" href="{% url 'login' %}">Déjà un projet ? Se connecter</a></div>
+          </div>
+
+        </div>
+
+      </div></div>
+
+    </form>
+  </div>
+</section>
+{% endblock %}

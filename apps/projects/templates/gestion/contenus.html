@@ -1,0 +1,23 @@
+{% extends "layouts/gestion.html" %}
+{% block title %}Contenus du site{% endblock %}
+{% block content %}
+<section class="page">
+  <div class="container stack">
+    <h1 data-reveal>Contenus du site</h1>
+    <p class="lead" data-reveal data-delay="100">Modifiez les textes et informations publiés sur le site.</p>
+    <div class="tw" data-reveal data-delay="150">
+      <table class="table tbl">
+        <thead><tr><th>Page</th><th>Contenu modifiable</th><th><span class="visually-hidden">Action</span></th></tr></thead>
+        <tbody data-stagger="60">
+          <tr><td><b>Accueil</b></td><td>Texte d’introduction, appel à l’inscription</td><td><a class="btn btn-outline-primary btn-sm" href="{% url 'admin_contenu_modifier' 'accueil' %}">Modifier</a></td></tr>
+          <tr><td><b>Concours</b></td><td>Objectifs, projets admissibles, prix, jury</td><td><a class="btn btn-outline-primary btn-sm" href="{% url 'admin_contenu_modifier' 'concours' %}">Modifier</a></td></tr>
+          <tr><td><b>Règlement</b></td><td>Articles du règlement</td><td><a class="btn btn-outline-primary btn-sm" href="{% url 'admin_contenu_modifier' 'reglement' %}">Modifier</a></td></tr>
+          <tr><td><b>Calendrier</b></td><td>Dates des trois phases</td><td><a class="btn btn-outline-primary btn-sm" href="{% url 'admin_contenu_modifier' 'calendrier' %}">Modifier</a></td></tr>
+          <tr><td><b>Sponsors</b></td><td>Logos et liste des partenaires</td><td><a class="btn btn-outline-primary btn-sm" href="{% url 'admin_contenu_modifier' 'sponsors' %}">Modifier</a></td></tr>
+          <tr><td><b>Contact</b></td><td>Coordonnées du comité d’organisation</td><td><a class="btn btn-outline-primary btn-sm" href="{% url 'admin_contenu_modifier' 'contact' %}">Modifier</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% load innova_ui %}{# Paramètres : fichier (le FileField du projet), web (version allégée, facultatif). Vidéo = lecteur + téléchargement ; autre format = téléchargement seul. #}
+<div class="media-box">
+{% if fichier %}
+  {% with kind=fichier|file_kind %}
+  {% if kind == "video" %}
+  <div class="media-player">
+    <video controls preload="metadata" playsinline src="{% if web %}{{ web.url }}{% else %}{{ fichier.url }}{% endif %}">
+      Votre navigateur ne peut pas lire cette vidéo. Vous pouvez la télécharger avec le bouton ci-dessous.
+    </video>
+  </div>
+  {% if not web %}<p class="soft small">Version allégée en préparation : la lecture peut être plus lente pendant quelques minutes.</p>{% endif %}
+  {% endif %}
+  <div class="media-file">
+    <span class="media-ext" aria-hidden="true">{{ fichier|file_ext|upper }}</span>
+    <div class="media-meta">
+      <b>{{ fichier|basename }}</b>
+      <span class="soft">{% if kind == "video" %}Vidéo{% else %}{{ fichier|file_label }}{% endif %}{% with size=fichier|file_size %}{% if size %} · {{ size }}{% endif %}{% endwith %}</span>
+    </div>
+    <a class="btn btn-outline-primary btn-sm" href="{{ fichier.url }}" download="{{ fichier|basename }}">Télécharger {% if kind == "video" %}la vidéo{% else %}le fichier{% endif %}</a>
+  </div>
+  {% endwith %}
+{% else %}
+  <div class="slot">Aucun fichier déposé pour ce projet.</div>
+{% endif %}
+</div>

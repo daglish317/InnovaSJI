@@ -1,0 +1,15 @@
+{% extends "layouts/public.html" %}
+{% block title %}Page introuvable{% endblock %}
+{% block content %}
+<section class="page">
+  <div class="container narrow stack text-center">
+    <div class="err-code" data-reveal="scale">4<span>0</span>4</div>
+    <h1 data-reveal data-delay="100">Page introuvable</h1>
+    <p class="lead mx-auto" data-reveal data-delay="200">La page que vous cherchez n’existe pas ou a été déplacée.</p>
+    <div class="actions justify-content-center" data-reveal data-delay="300">
+      <a class="btn btn-primary" href="">Retour à l’accueil</a>
+      <a class="btn btn-outline-primary" href="">Nous contacter</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

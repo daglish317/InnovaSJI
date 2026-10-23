@@ -1,0 +1,14 @@
+{# Zone d’erreurs de formulaire. Paramètres : form, form2 (facultatif), title (facultatif). #}
+{% if form.errors or form2.errors %}
+<div class="form-alert" role="alert" tabindex="-1">
+  <svg class="ico ico-lg" aria-hidden="true"><use href="#i-alert"/></svg>
+  <div>
+    <strong>{% if title %}{{ title }}{% else %}Le formulaire n’a pas pu être enregistré.{% endif %}</strong>
+    <p>Veuillez corriger les points suivants :</p>
+    <ul>
+      {% include "partials/_form_errors_list.html" with form=form %}
+      {% if form2 %}{% include "partials/_form_errors_list.html" with form=form2 %}{% endif %}
+    </ul>
+  </div>
+</div>
+{% endif %}

@@ -1,0 +1,56 @@
+{% extends base.html %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+{% block content %}
+<section class="page" data-k="pub" id="participer">
+    <div class="w narrow">
+        <h1>Créer un compte</h1>
+
+        <form method="post" class="f" style="grid-template-columns:1fr">
+
+            {% csrf_token %}
+
+            <div class="card f"><h3 class="full">Le responsable du projet</h3>
+
+                <label for="{{ form.name.id_for_label }}">Nom</label>
+                {{ form.name }}
+
+                <label for="{{ form.firstname.id_for_label }}">Prénom</label>
+                {{ form.firstname }}
+
+                <label for="{{ form.registration_number.id_for_label }}">Matricule</label>
+                {{ form.registration_number }}
+
+                <label for="{{ form.level.id_for_level }}">Niveau d’études<</label>
+                {{ form.level }}
+
+                <label for="{{ form.email.id_for_label }}">Adresse e-mail\</label>
+                {{ form.email }}
+
+                <label for="{{ form.phone.id_for_label }}">Téléphone</label>
+                {{ form.phone }}
+
+                <label for="{{ form.password1.id_for_label }}">Mot de passe <small>Pour vous connecter à votre espace</small></label>
+                {{ form.password1 }}
+
+                <label for="{{ form.password2.id_for_label }}">Confirmer le mot de passe</label>
+                {{ form.password2 }}
+
+            </div>
+
+        </form>
+
+    </div>
+
+</section>
+
+{% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,91 @@
+{% extends "layouts/gestion.html" %}
+{% load innova_ui %}
+{% block title %}{{ projet.nom }}{% endblock %}
+{% block content %}
+<section class="page">
+    <div class="container stack">
+        <a class="soft link" data-reveal href="{% url 'project_list' %}">Retour aux projets</a>
+        <div class="page-head" data-reveal>
+            <h1>{{ project.title }}</h1>
+            {% include "partials/_statut_badge.html" with statut=project.status label=project.get_status_display %}
+        </div>
+
+        <div class="g" data-stagger>
+            <div class="card">
+                <div class="card-body flow">
+                    <h3>Informations</h3>
+                    <dl class="kv">
+                        <dt>Catégorie</dt>
+                        <dd class="soft">{{ project.category }}</dd>
+                        <dt>Description</dt>
+                        <dd class="soft pre">{{ project.description }}</dd>
+                        <dt>Problématique</dt>
+                        <dd class="soft pre">{{ project.problematic }}</dd>
+                        <dt>Solution</dt>
+                        <dd class="soft pre">{{ project.solution }}</dd>
+
+                    </dl>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body flow">
+                    <h3>Décision</h3>
+                    {% if project.status == "VALIDE" or project.status == "REFUSE" %}
+                    <p class="soft">Ce projet a été traité : {{ project.get_status_display|lower }}.</p>
+                    {% else %}
+                    <p class="soft">Vérifiez que le dossier est complet et que chaque membre n’appartient qu’à ce
+                        projet.</p>
+                    <div class="actions">
+                        <form action="" method="post">{% csrf_token %}
+                            <input name="source" type="hidden" value="detail">
+                            <button class="btn btn-primary" name="action" type="submit" value="accept">Valider
+                                l’inscription
+                            </button>
+                            <button class="btn btn-outline-danger" data-action="" data-confirm data-ok="Refuser"
+                                    data-text="L’inscription « {{ projet.nom }} » sera refusée."
+                                    data-title="Refuser ce projet ?" name="action" type="button" value="reject">Refuser
+                            </button>
+                        </form>
+
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="card" data-reveal>
+            <div class="card-body flow">
+                <h3>Présentation du projet</h3>
+                {% include "partials/_media_project.html" with fichier=project.presentation_file web=project.presentation_web %}
+            </div>
+        </div>
+
+        <div class="tw" data-reveal>
+            <table class="table tbl">
+                <thead>
+                <tr>
+                    <th>Nom et prénom</th>
+                    <th>Matricule</th>
+                    <th>Niveau</th>
+                    <th>E-mail</th>
+                    <th>Téléphone</th>
+                    <th>Rôle</th>
+                </tr>
+                </thead>
+                <tbody data-stagger="70">
+                {% for m in students %}
+                <tr>
+                    <td>{{ m.name }} {{ m.firstname }}</td>
+                    <td class="id">{{ m.registration_number }}</td>
+                    <td>{{ m.level }}</td>
+                    <td>{{ m.email }}</td>
+                    <td>{{ m.phone }}</td>
+                    <td>{% if m.is_chief %}<span class="badge st">Responsable</span>{% else %}Membre{% endif %}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+{% endblock %}

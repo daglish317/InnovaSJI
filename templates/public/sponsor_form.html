@@ -1,0 +1,26 @@
+{% extends "layouts/public.html" %}
+{% block title %}Devenir sponsor{% endblock %}
+{% block content %}
+<section class="page">
+  <div class="container narrow stack">
+    <h1 data-reveal>Devenir sponsor</h1>
+    <p class="lead" data-reveal data-delay="100">Présentez-nous votre soutien. Les organisateurs vous répondent après étude de votre proposition.</p>
+    <form method="post" class="form-zone" data-reveal data-delay="150">
+      {% csrf_token %}
+      {% include "partials/_form_errors.html" with form=form %}
+      <div class="card"><div class="card-body"><div class="row g-3">
+        {% include "partials/_field.html" with field=form.organisation %}
+        {% include "partials/_field.html" with field=form.responsable %}
+        {% include "partials/_field.html" with field=form.email %}
+        {% include "partials/_field.html" with field=form.telephone %}
+        {% include "partials/_field.html" with field=form.type_organisation %}
+        {% include "partials/_field.html" with field=form.type_soutien %}
+        {% include "partials/_field.html" with field=form.montant hint="Si le soutien est financier" %}
+        {% include "partials/_field.html" with field=form.site_web hint="Facultatif" %}
+        {% include "partials/_field.html" with field=form.message col="col-12" %}
+        <div class="col-12"><button class="btn btn-primary" type="submit">Envoyer ma proposition</button></div>
+      </div></div></div>
+    </form>
+  </div>
+</section>
+{% endblock %}

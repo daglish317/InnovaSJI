@@ -1,0 +1,7 @@
+{# Champs du projet, partagés entre l’inscription et la modification. Paramètre : form #}
+{% include "partials/_field.html" with field=form.title %}
+{% include "partials/_field.html" with field=form.category %}
+{% include "partials/_field.html" with field=form.description col="col-12" %}
+{% include "partials/_field.html" with field=form.problematic col="col-12" %}
+{% include "partials/_field.html" with field=form.solution col="col-12" %}
+{% include "partials/_field.html" with field=form.presentation_file col="col-12" hint="PowerPoint ou vidéo de 2 à 3 minutes, 100 Mo maximum" %}

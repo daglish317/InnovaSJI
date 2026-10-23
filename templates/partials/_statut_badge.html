@@ -1,0 +1,2 @@
+{# Paramètres : statut (valeur brute), label (texte affiché). valide/accepte = vert, refuse = rouge, sinon = en attente. #}
+{% if statut == "VALIDE" %}<span class="badge st st-ok">{{ label }}</span>{% elif statut == "REFUSE" %}<span class="badge st st-no">{{ label }}</span>{% else %}<span class="badge st st-wt">{{ label }}</span>{% endif %}

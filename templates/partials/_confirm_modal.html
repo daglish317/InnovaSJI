@@ -1,0 +1,18 @@
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <form method="post" id="confirmForm" action="">
+        {% csrf_token %}
+        <div class="modal-header">
+          <h2 class="modal-title" id="confirmTitle">Confirmer cette action ?</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+        </div>
+        <div class="modal-body"><p class="soft" id="confirmText"></p></div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Annuler</button>
+          <button type="submit" class="btn btn-outline-danger" id="confirmOk">Confirmer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

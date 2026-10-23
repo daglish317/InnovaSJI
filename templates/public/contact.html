@@ -1,0 +1,28 @@
+{% extends "layouts/public.html" %}
+{% block title %}Contact{% endblock %}
+{% block content %}
+<section class="page">
+  <div class="container stack">
+    <h1 data-reveal>Contact</h1>
+    <p class="lead" data-reveal data-delay="100">Une question sur le concours ou sur votre inscription ? Écrivez au comité d’organisation.</p>
+    <div class="g">
+      <div class="card" data-reveal><div class="card-body flow">
+        <h3>Comité d’organisation</h3>
+        <p>Campus Saint Jean Ingénieur d’Etok-Koss</p>
+        {% if contact_email %}<p><a class="link" href="mailto:{{ contact_email }}">{{ contact_email }}</a></p>{% endif %}
+        {% if contact_telephone %}<p><a class="link" href="tel:{{ contact_telephone|cut:' ' }}">{{ contact_telephone }}</a></p>{% endif %}
+      </div></div>
+      <form method="post" class="form-zone" data-reveal data-delay="150">
+        {% csrf_token %}
+        {% include "partials/_form_errors.html" with form=form %}
+        <div class="card"><div class="card-body"><div class="row g-3">
+          {% include "partials/_field.html" with field=form.nom col="col-12" hint="" %}
+          {% include "partials/_field.html" with field=form.email col="col-12" %}
+          {% include "partials/_field.html" with field=form.message col="col-12" %}
+          <div class="col-12"><button class="btn btn-primary" type="submit">Envoyer le message</button></div>
+        </div></div></div>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

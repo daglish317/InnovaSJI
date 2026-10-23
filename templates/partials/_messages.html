@@ -1,0 +1,25 @@
+{# Zone des confirmations et alertes (framework messages de Django). #}
+{% if messages %}
+<div class="container flash-zone" aria-live="polite">
+  {% for message in messages %}
+  {% with kind=message.level_tag %}
+  {% if kind == "error" %}
+  <div class="alert alert-danger alert-dismissible fade show flash" role="alert">
+    <svg class="ico ico-lg" aria-hidden="true"><use href="#i-x"/></svg>
+  {% elif kind == "warning" %}
+  <div class="alert alert-warning alert-dismissible fade show flash" role="alert">
+    <svg class="ico ico-lg" aria-hidden="true"><use href="#i-alert"/></svg>
+  {% elif kind == "success" %}
+  <div class="alert alert-success alert-dismissible fade show flash" role="status" data-autohide="7000" style="--t:7000ms">
+    <svg class="ico ico-lg" aria-hidden="true"><use href="#i-check"/></svg>
+  {% else %}
+  <div class="alert alert-info alert-dismissible fade show flash" role="status" data-autohide="7000" style="--t:7000ms">
+    <svg class="ico ico-lg" aria-hidden="true"><use href="#i-info"/></svg>
+  {% endif %}
+    <div class="flash-body">{{ message }}</div>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
+  </div>
+  {% endwith %}
+  {% endfor %}
+</div>
+{% endif %}

@@ -1,0 +1,84 @@
+{% extends "layouts/espace.html" %}
+{% load innova_ui %}
+{% block title %}Mon projet{% endblock %}
+{% block content %}
+{% with max=max_members n=students.count %}
+
+<section class="page">
+
+    <div class="container stack">
+        <div class="page-head" data-reveal>
+            <h1>Mon projet</h1>
+            {% include "partials/_statut_badge.html" with statut=project.status label=project.get_status_display %}
+        </div>
+
+        <div class="g" data-stagger>
+            <div class="card">
+                <div class="card-body flow">
+                    <h3>Informations</h3>
+                    <dl class="kv">
+                        <dt>Nom</dt>
+                        <dd class="soft">{{ project.title }}</dd>
+                        <dt>Catégorie</dt>
+                        <dd class="soft">{{ project.category }}</dd>
+                        <dt>Problématique</dt>
+                        <dd class="soft pre">{{ project.problematic }}</dd>
+                        <dt>Solution</dt>
+                        <dd class="soft pre">{{ project.solution }}</dd>
+
+                    </dl>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body flow">
+                    <h3>Équipe</h3>
+                    <p class="soft">{{ n }} membre{{ n|pluralize }} sur {{ max }} au maximum</p>
+                    <div aria-label="{{ n }} membres sur {{ max }}" aria-valuemax="{{ max }}" aria-valuemin="0"
+                         aria-valuenow="{{ n }}" class="progress" role="progressbar">
+                        <div class="progress-bar" style="width:{% widthratio n max 100 %}%"></div>
+                    </div>
+                    {% if n >= max %}
+                    <button class="btn btn-primary" disabled type="button">Équipe complète</button>
+                    {% else %}
+                    <a class="btn btn-primary" href="{% url 'add_member' %}">Ajouter un membre</a>
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+
+        <div class="card" data-reveal>
+            <div class="card-body flow">
+                <h3>Présentation du projet</h3>
+                {% include "partials/_media_project.html" with fichier=project.presentation_file web=project.presentation_web %}
+            </div>
+        </div>
+
+        <div class="tw" data-reveal>
+            <table class="table tbl">
+                <thead>
+                <tr>
+                    <th>Nom et prénom</th>
+                    <th>Matricule</th>
+                    <th>Niveau</th>
+                    <th>Rôle</th>
+                </tr>
+                </thead>
+                <tbody data-stagger="70">
+                {% for m in students %}
+                <tr>
+                    <td>{{ m.name }} {{ m.firstname }}</td>
+                    <td class="id">{{ m.registration_number }}</td>
+                    <td>{{ m.level }}</td>
+                    <td>{% if m.is_chief %}<span class="badge st">Responsable</span>{% else %}Membre{% endif %}</td>
+
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+{% endwith %}
+{% endblock %}
