@@ -10,7 +10,7 @@
         <ul class="navbar-nav align-items-lg-center">
           <li class="nav-item"><a class="nav-link{% if current == 'my_project' or current == 'add_member' %} on{% endif %}" href="{% url 'my_project' pk=project.id %}"{% if current == 'my_project' or current == 'add_member' %} aria-current="page"{% endif %}>Mon projet</a></li>
           <li class="nav-item nav-cta">
-            <a class="btn btn-primary btn-sm" href="{% url 'home' %}">Accueil</a>
+            <a class="btn btn-primary btn-sm" href="{% url 'home' page="home" %}">Accueil</a>
           </li>
           <li class="nav-item nav-cta">
             <form method="post" action="{% url 'logout' %}" class="m-0">{% csrf_token %}<button class="btn btn-primary btn-sm" type="submit" data-no-loading>Déconnexion</button></form>

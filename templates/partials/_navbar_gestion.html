@@ -13,7 +13,7 @@
           <li class="nav-item"><a class="nav-link{% if current == 'admin_sponsors' %} on{% endif %}" href=""{% if current == 'admin_sponsors' %} aria-current="page"{% endif %}>Sponsors</a></li>
           <li class="nav-item"><a class="nav-link{% if current == 'admin_contenus' or current == 'admin_contenu_modifier' %} on{% endif %}" href=""{% if current == 'admin_contenus' or current == 'admin_contenu_modifier' %} aria-current="page"{% endif %}>Contenus</a></li>
           <li class="nav-item nav-cta">
-            <a class="btn btn-primary btn-sm" href="{% url 'home' %}">Accueil</a>
+            <a class="btn btn-primary btn-sm" href="{% url 'home' page="home" %}">Accueil</a>
           </li>
           <li class="nav-item nav-cta">
             <form method="post" action="{% url 'logout' %}" class="m-0">{% csrf_token %}<button class="btn btn-primary btn-sm" type="submit" data-no-loading>Déconnexion</button></form>

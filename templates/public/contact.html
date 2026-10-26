@@ -16,7 +16,7 @@
         {% csrf_token %}
         {% include "partials/_form_errors.html" with form=form %}
         <div class="card"><div class="card-body"><div class="row g-3">
-          {% include "partials/_field.html" with field=form.nom col="col-12" hint="" %}
+          {% include "partials/_field.html" with field=form.name col="col-12" hint="" %}
           {% include "partials/_field.html" with field=form.email col="col-12" %}
           {% include "partials/_field.html" with field=form.message col="col-12" %}
           <div class="col-12"><button class="btn btn-primary" type="submit">Envoyer le message</button></div>

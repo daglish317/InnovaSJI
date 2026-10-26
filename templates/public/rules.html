@@ -63,7 +63,20 @@
         <div id="art14" class="accordion-collapse collapse"><div class="accordion-body"><p>Le comité d’organisation peut modifier certaines dispositions pour assurer le bon déroulement du concours. Toute modification est portée à la connaissance des participants.</p></div></div>
       </div>
     </div>
-    <div class="actions" data-reveal><a class="btn btn-primary" href="{% url 'inscription' %}">Inscrire mon projet</a></div>
+    <div class="actions" data-reveal>
+
+      {% if user.is_authenticated %}
+        {% if user.is_staff %}
+          <a class="btn btn-primary btn-sm" href="{% url 'project_list' %}">Administration</a>
+        {% else %}
+          <a class="btn btn-primary btn-sm" href="{% url 'my_project' pk=project.id %}">Mon espace</a>
+        {% endif %}
+      {% else %}
+         <a class="btn btn-primary btn-sm" href="{% url 'register' %}">Participer</a>
+      {% endif %}
+
+    </div>
+
   </div>
 </section>
 {% endblock %}
